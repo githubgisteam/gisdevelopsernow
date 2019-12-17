@@ -24,7 +24,7 @@ const ServiceNow = new sn('dev54863', 'indus_user', 'Demo*123');
 /** end connection  from servicenow*/
 
 /**pass incoming webhook to send messege to slack from azure */
-var MY_SLACK_WEBHOOK_URL = "https://hooks.slack.com/services/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";
+var MY_SLACK_WEBHOOK_URL = "https://hooks.slack.com/services/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";
 var slack = require('slack-notify')(MY_SLACK_WEBHOOK_URL);
 
 
