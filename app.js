@@ -31,10 +31,11 @@ var slack = require('slack-notify')(MY_SLACK_WEBHOOK_URL);
 ///////////////////////////////////////////
 //     API for connection from servicenow ticket//
 ///////////////////////////////////////////
-app.post('/snow', function (req, response) {
- 
-		console.log("Display name ", req.body.queryResult.intent.displayName);
-        switch (req.body.queryResult.intent.displayName) {			      		  
+app.get('/snow', function (req, response) {
+    
+    switch("tktlist"){
+	//	console.log("Display name ", req.body.queryResult.intent.displayName);
+       // switch (req.body.queryResult.intent.displayName) {			      		  
 			
 		/**Create new ticket in service now */
         case "createnewticketservicenow":
@@ -150,21 +151,34 @@ app.post('/snow', function (req, response) {
                 'incident_state=2',
                 //'opened_atONLast 6 months@javascript:gs.beginningOfLast6Months()@javascript:gs.endOfLast6Months()' //Opened on last 6 months
             ];
-
+        
             ServiceNow.getTableData(fieldsdata, filtersdata, 'incident', res => {
 				console.log("data", res)
-				response.setHeader('Content-Type', 'text/plain');
+                  var resp ="";
+                response.setHeader('Content-Type', 'text/plain');
+   /*           for (var i = 1; i <= res.length ; i++){
+                    resp+= 'Ticket Number' + res[i].number + "status is" + res[i].incident_state ;
+                }
+               res.send(resp); 
+*/
                 for (var i = 0; i < res.length; i++) {
-                 console.log("data is here", res[i].number +"  && urgency is "+ res[i].incident_state);
+                
+                resp+=' Ticket number' + res[i].number + "status is " + res[i].incident_state ;
+                //response.write(JSON.stringify({ "fulfillmentText": "Ticket number: " + res[i].number + " and urgency " + res[i].urgency}));
+                console.log(resp);
+               // response.end();
+                //     res.send(resp);
+                }
+  /*            
 				 slack.send({				  
-						channel: 'azure',
+						channel: 'gisdevelopservicenow',
 						text:  'Ticket Number '+res[i].number + " status is " +res[i].incident_state 
 					});  
-                // response.send(JSON.stringify({ "fulfillmentText": "Ticket number: " + res[i].number + " and urgency " + res[i].urgency +"/ n"}));
+                 response.write(JSON.stringify({ "fulfillmentText": "Ticket number: " + res[i].number + " and urgency " + res[i].urgency +"/ n"}));
 				response.write(JSON.stringify({ "fulfillmentText": "Ticket number: " + res[i].number + " and urgency " + res[i].urgency +"/ n"}));
-                }
-				response.end();
-
+                */                
+			//	
+          
             });
             break;
 			
