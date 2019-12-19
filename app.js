@@ -157,10 +157,10 @@ app.post('/snow', function (req, response) {
 				response.setHeader('Content-Type', 'text/plain');
                 for (var i = 0; i < res.length; i++) {
                  console.log("data is here", res[i].number +"  && urgency is "+ res[i].incident_state);
-			/*	 slack.send({				  
+				 slack.send({				  
 						channel: 'azure',
 						text:  'Ticket Number '+res[i].number + " status is " +res[i].incident_state 
-            */		});  
+            		});  
                 // response.send(JSON.stringify({ "fulfillmentText": "Ticket number: " + res[i].number + " and urgency " + res[i].urgency +"/ n"}));
 				response.write(JSON.stringify({ "fulfillmentText": "Ticket number: " + res[i].number + " and urgency " + res[i].urgency +"/ n"}));
                 }
