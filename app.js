@@ -167,7 +167,7 @@ app.post('/snow', function (req, response) {
                 
              //   resp+=' Ticket number' + res[i].number + "status is " + res[i].incident_state ;
           //      response.send(JSON.stringify({resp}));
-            //    resp+= "Ticket number: " + res[i].number + " and urgency is " + res[i].urgency ;
+                resp+= "Ticket number: " + res[i].number + " and urgency is " + res[i].urgency ;
               //  console.log(resp); 
                 //response.write(JSON.stringify(resp));
 //                slack.send({				  
