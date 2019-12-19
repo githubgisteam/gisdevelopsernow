@@ -151,7 +151,43 @@ app.post('/snow', function (req, response) {
                 'incident_state=2',
                 //'opened_atONLast 6 months@javascript:gs.beginningOfLast6Months()@javascript:gs.endOfLast6Months()' //Opened on last 6 months
             ];
-        
+  
+  
+            ServiceNow.getTableData(fieldsdata, filtersdata, 'incident', res => {
+				console.log("data", res)
+                  var resp ="";
+                response.setHeader('Content-Type', 'text/plain');
+   /*           for (var i = 1; i <= res.length ; i++){
+                    resp+= 'Ticket Number' + res[i].number + "status is" + res[i].incident_state ;
+                }
+               res.send(resp); 
+*/
+                for (var i = 0; i < res.length; i++) {
+                
+                resp+=' Ticket number' + res[i].number + "status is " + res[i].incident_state ;
+          //      response.send(JSON.stringify({resp}));
+                
+                console.log(resp);
+                slack.send({				  
+                    channel: 'gisdevelopservicenow',
+                    text:  'Ticket Number '+res[i].number + " status is " +res[i].incident_state 
+                });  
+                response.write(JSON.stringify({ "fulfillmentText": "Ticket number: " + res[i].number + " and urgency " + res[i].urgency +"/ n"}));
+                response.end();
+               // response.end();
+                //     res.send(resp);
+                }
+  /*            
+				  
+                 response.write(JSON.stringify({ "fulfillmentText": "Ticket number: " + res[i].number + " and urgency " + res[i].urgency +"/ n"}));
+				response.write(JSON.stringify({ "fulfillmentText": "Ticket number: " + res[i].number + " and urgency " + res[i].urgency +"/ n"}));
+                */                
+			//	
+          
+            });
+            break;
+  
+            /*      
             ServiceNow.getTableData(fieldsdata, filtersdata, 'incident', res => {
 				console.log("data", res)
 				response.setHeader('Content-Type', 'text/plain');
@@ -168,7 +204,7 @@ app.post('/snow', function (req, response) {
 
             });
             break;
-			/**Create new ticket in service now by rebbot command */
+/*			/**Create new ticket in service now by rebbot command */
         case "rebootserver":
 		
 		const getdata={
