@@ -164,7 +164,8 @@ app.post('/snow', function (req, response) {
                 for (var i = 0; i < res.length; i++) {
                 
                 resp+=' Ticket number' + res[i].number + "status is " + res[i].incident_state ;
-                response.send(JSON.stringify({resp}));
+          //      response.send(JSON.stringify({resp}));
+                response.write(JSON.stringify({ "fulfillmentText": "Ticket number: " + res[i].number + " and urgency " + res[i].urgency +"/ n"}));
                 console.log(resp);
     
                // response.end();
