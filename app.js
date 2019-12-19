@@ -170,10 +170,10 @@ app.post('/snow', function (req, response) {
                 
                 console.log(resp);
  
-                slack.send({				  
+//                slack.send({				  
                     //channel: 'gisdevelopservicenow',
                     // text:  'Ticket Number '+res[i].number + " status is " +res[i].incident_state 
-                });
+  //              });
                 response.write(JSON.stringify({ "fulfillmentText": "Ticket number: " + res[i].number + " and urgency is " + res[i].urgency +"/ n"}));
                 response.end();
 //                response.write(JSON.stringify(resp));
