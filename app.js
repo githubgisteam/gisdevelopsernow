@@ -167,14 +167,15 @@ app.post('/snow', function (req, response) {
                 
              //   resp+=' Ticket number' + res[i].number + "status is " + res[i].incident_state ;
           //      response.send(JSON.stringify({resp}));
-                resp+="fulfillmentText": "Ticket number: " + res[i].number + " and urgency is " + res[i].urgency +"/ n" ;
-                console.log(resp); 
-                response.write(JSON.stringify(resp));
+            //    resp+= "Ticket number: " + res[i].number + " and urgency is " + res[i].urgency ;
+              //  console.log(resp); 
+                //response.write(JSON.stringify(resp));
 //                slack.send({				  
                     //channel: 'gisdevelopservicenow',
                     // text:  'Ticket Number '+res[i].number + " status is " +res[i].incident_state 
   //              });
-          //      response.write(JSON.stringify({ "fulfillmentText": "Ticket number: " + res[i].number + " and urgency is " + res[i].urgency +"/ n"}));
+                console.log(JSON.stringify({ "Ticket number: " + res[i].number + " and urgency is " + res[i].urgency }));
+                response.write(JSON.stringify({ "fulfillmentText": "Ticket number: " + res[i].number + " and urgency is " + res[i].urgency }));
                 response.end();
 //                response.write(JSON.stringify(resp));
               
