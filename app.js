@@ -174,12 +174,12 @@ app.get('/snow', function (req, response) {
                     text:  'Ticket Number '+res[i].number + " status is " +res[i].incident_state 
                 });
 //                response.write(JSON.stringify(resp));
-                
+                response.write(JSON.stringify({ "fulfillmentText": "Ticket number: " + res[i].number + " and urgency " + res[i].urgency +"/ n"}));
+                response.end();
                // response.end();
                 //     res.send(resp);
                 }
-                response.write(JSON.stringify({ "fulfillmentText": "Ticket number: " + res[i].number + " and urgency " + res[i].urgency +"/ n"}));
-                response.end();
+                
   /*            
 				  
                  response.write(JSON.stringify({ "fulfillmentText": "Ticket number: " + res[i].number + " and urgency " + res[i].urgency +"/ n"}));
