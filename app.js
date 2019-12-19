@@ -31,11 +31,11 @@ var slack = require('slack-notify')(MY_SLACK_WEBHOOK_URL);
 ///////////////////////////////////////////
 //     API for connection from servicenow ticket//
 ///////////////////////////////////////////
-app.post('/snow', function (req, response) {
+app.get('/snow', function (req, response) {
     
-   // switch("tktlist"){
+    switch("tktlist"){
 	//	console.log("Display name ", req.body.queryResult.intent.displayName);
-       switch (req.body.queryResult.intent.displayName) {			      		  
+      // switch (req.body.queryResult.intent.displayName) {			      		  
 			
 		/**Create new ticket in service now */
         case "createnewticketservicenow":
@@ -156,6 +156,7 @@ app.post('/snow', function (req, response) {
             ServiceNow.getTableData(fieldsdata, filtersdata, 'incident', res => {
 				console.log("data", res)
                   var resp ="";
+                  console.log(res.length);
                 response.setHeader('Content-Type', 'text/plain');
    /*           for (var i = 1; i <= res.length ; i++){
                     resp+= 'Ticket Number' + res[i].number + "status is" + res[i].incident_state ;
@@ -172,12 +173,13 @@ app.post('/snow', function (req, response) {
                     channel: 'gisdevelopservicenow',
                     text:  'Ticket Number '+res[i].number + " status is " +res[i].incident_state 
                 });
-                response.write(JSON.stringify(resp));
-                //response.write(JSON.stringify({ "fulfillmentText": "Ticket number: " + res[i].number + " and urgency " + res[i].urgency +"/ n"}));
-                response.end();
+//                response.write(JSON.stringify(resp));
+                
                // response.end();
                 //     res.send(resp);
                 }
+                response.write(JSON.stringify({ "fulfillmentText": "Ticket number: " + res[i].number + " and urgency " + res[i].urgency +"/ n"}));
+                response.end();
   /*            
 				  
                  response.write(JSON.stringify({ "fulfillmentText": "Ticket number: " + res[i].number + " and urgency " + res[i].urgency +"/ n"}));
