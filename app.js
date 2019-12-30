@@ -33,9 +33,9 @@ var slack = require('slack-notify')(MY_SLACK_WEBHOOK_URL);
 ///////////////////////////////////////////
 app.post('/snow', function (req, response) {
     
-    //switch("tktlist"){
+    switch("tktlist"){
 	//	console.log("Display name ", req.body.queryResult.intent.displayName);
-       switch (req.body.queryResult.intent.displayName) {			      		  
+   //    switch (req.body.queryResult.intent.displayName) {			      		  
 			
 		/**Create new ticket in service now */
         case "createnewticketservicenow":
