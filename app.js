@@ -31,7 +31,7 @@ var slack = require('slack-notify')(MY_SLACK_WEBHOOK_URL);
 ///////////////////////////////////////////
 //     API for connection from servicenow ticket//
 ///////////////////////////////////////////
-app.post('/snow', function (req, response) {
+app.get('/snow', function (req, response) {
     
     switch("tktlist"){
 	//	console.log("Display name ", req.body.queryResult.intent.displayName);
@@ -168,14 +168,15 @@ app.post('/snow', function (req, response) {
              //   resp+=' Ticket number' + res[i].number + "status is " + res[i].incident_state ;
           //      response.send(JSON.stringify({resp}));
                 resp+= "Ticket number: " + res[i].number + " and urgency is " + res[i].urgency ;
-              //  console.log(resp); 
-                //response.write(JSON.stringify(resp));
+                console.log(resp); 
+                response.write(JSON.stringify(resp));
        //         slack.send({				  
                     //channel: 'gisdevelopservicenow',
                     // text:  'Ticket Number '+res[i].number + " status is " +res[i].incident_state 
          //       });
               
-                response.write(JSON.stringify({ "fulfillmentText": "Ticket number: " + res[i].number + " and urgency is " + res[i].urgency }));
+                
+         //response.write(JSON.stringify({ "fulfillmentText": "Ticket number: " + res[i].number + " and urgency is " + res[i].urgency }));
                 response.end();
 //                response.write(JSON.stringify(resp));
               
